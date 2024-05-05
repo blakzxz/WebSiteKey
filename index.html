@@ -12,7 +12,9 @@
     <div class="brand-logo"></div>
     <div class="brand-title">Get a Key!</div>
     <div class="inputs">
-        <label>1 - Get a Key</label>
+        <label>1 - Join in our Discord for news scripts</label>
+        <button id="discordBtn" type="button">Discord</button>
+        <label>2 - Get a Key</label>
         <button id="keyBtn" type="button">Key</button>
     </div>
 </div>
@@ -20,6 +22,20 @@
 <div id="notification" class="notification"></div>
 
 <script>
+    var discordClicked = false;
+
+    document.getElementById("discordBtn").addEventListener("click", function() {
+        discordClicked = true;
+        window.open("https://discord.gg/VCE4cN24Bj", "_blank");
+    });
+
+    document.getElementById("keyBtn").addEventListener("click", function() {
+        if (discordClicked) {
+            getKey();
+        } else {
+            showAccessDenied();
+        }
+    });
 
     function getKey() {
         fetch('https://raw.githubusercontent.com/blakzxz/Key/main/keyfile')
@@ -40,7 +56,7 @@
 
     function showAccessDenied() {
         var notification = document.getElementById("notification");
-        notification.innerText = "Acesso Negado!";
+        notification.innerText = "Acess Denied! Click First on Discord Button";
         notification.classList.add("show", "access-denied");
         setTimeout(function() {
             notification.classList.remove("show", "access-denied");
