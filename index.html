@@ -22,14 +22,6 @@
 <div id="notification" class="notification"></div>
 
 <script>
-  
-    document.getElementById("keyBtn").addEventListener("click", function() {
-        if (discordClicked) {
-            getKey();
-        } else {
-            showAccessDenied();
-        }
-    });
 
     function getKey() {
         fetch('https://raw.githubusercontent.com/blakzxz/Key/main/keyfile')
