@@ -14,24 +14,15 @@
     <div class="inputs">
         <label>1 - Join in our Discord for news scripts</label>
         <button id="discordBtn" type="button">Discord</button>
-        <label>2 - Get a Key</label>
-        <button id="keyBtn" type="button" disabled>Key</button>
+        <label>1 - Get a Key</label>
+        <button id="keyBtn" type="button">Key</button>
     </div>
 </div>
 
 <div id="notification" class="notification"></div>
 
 <script>
-    var discordClicked = false;
-
-    document.getElementById("discordBtn").addEventListener("click", function() {
-        discordClicked = true;
-        window.open("https://discord.gg/VCE4cN24Bj", "_blank");
-        setTimeout(function() {
-            document.getElementById("keyBtn").removeAttribute("disabled");
-        }, 5000);
-    });
-
+  
     document.getElementById("keyBtn").addEventListener("click", function() {
         if (discordClicked) {
             getKey();
