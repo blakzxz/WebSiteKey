@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔑 - Get Key</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+<div class="container">
+    <div class="brand-logo"></div>
+    <div class="brand-title">Get a Key!</div>
+    <div class="inputs">
+        <label>1 - Join in our Discord for news scripts</label>
+        <button id="discordBtn" type="button">Discord</button>
+        <label>2 - Get a Key</label>
+        <button id="keyBtn" type="button" disabled>Key</button>
+    </div>
+</div>
+
+<div id="notification" class="notification"></div>
+
+<script>
+    var discordClicked = false;
+
+    document.getElementById("discordBtn").addEventListener("click", function() {
+        discordClicked = true;
+        window.open("https://discord.gg/VCE4cN24Bj", "_blank");
+        setTimeout(function() {
+            document.getElementById("keyBtn").removeAttribute("disabled");
+        }, 5000);
+    });
+
+    document.getElementById("keyBtn").addEventListener("click", function() {
+        if (discordClicked) {
+            getKey();
+        } else {
+            showAccessDenied();
+        }
+    });
+
+    function getKey() {
+        fetch('https://raw.githubusercontent.com/blakzxz/Key/main/keyfile')
+            .then(response => response.text())
+            .then(data => showNotification(data))
+            .catch(error => console.error('Erro ao obter a chave:', error));
+    }
+
+    function showNotification(key) {
+    var notification = document.getElementById("notification");
+    notification.innerText = "Key: " + key;
+    notification.classList.add("show");
+    setTimeout(function() {
+        notification.classList.remove("show");
+    }, 3000);
+}
+
+
+    function showAccessDenied() {
+        var notification = document.getElementById("notification");
+        notification.innerText = "Acesso Negado!";
+        notification.classList.add("show", "access-denied");
+        setTimeout(function() {
+            notification.classList.remove("show", "access-denied");
+        }, 3000);
+    }
+</script>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap');
+
+input {
+  caret-color: red;
+}
+
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #ecf0f3;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  place-items: center;
+  overflow: hidden;
+  font-family: poppins;
+}
+
+.container {
+  position: relative;
+  width: 350px;
+  height: 500px;
+  border-radius: 20px;
+  padding: 40px;
+  box-sizing: border-box;
+  background: #ecf0f3;
+  box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+}
+.notification {
+    position: fixed;
+    top: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background-color: green;
+    color: white;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 999;
+}
+.access-denied {
+    background-color: red;
+}
+
+.notification.show {
+    opacity: 1;
+}
+
+.brand-logo {
+  height: 100px;
+  width: 100px;
+  background: url("https://tr.rbxcdn.com/30DAY-AvatarHeadshot-A7764D7E12AF52E9AC3A87B34AB38DFD-Png/150/150/AvatarHeadshot/Webp/noFilter");
+  background-size: cover;
+  background-position: center center;
+  margin: auto;
+  border-radius: 50%;
+  box-sizing: border-box;
+  box-shadow: 7px 7px 10px #cbced1, -7px -7px 10px white;
+}
+
+
+.brand-title {
+  margin-top: 10px;
+  font-weight: 900;
+  font-size: 1.8rem;
+  color: #000000;
+  letter-spacing: 1px;
+}
+
+.inputs {
+  text-align: left;
+  margin-top: 30px;
+}
+
+label, input, button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+label {
+  margin-bottom: 4px;
+}
+
+label:nth-of-type(2) {
+  margin-top: 12px;
+}
+
+input::placeholder {
+  color: gray;
+}
+
+input {
+  background: #ecf0f3;
+  padding: 10px;
+  padding-left: 20px;
+  height: 50px;
+  font-size: 14px;
+  border-radius: 50px;
+  box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+}
+
+button {
+  color: white;
+  margin-top: 20px;
+  background: #000000;
+  height: 40px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 900;
+  box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
+  transition: 0.5s;
+}
+
+button:hover {
+  box-shadow: none;
+}
+
+a {
+  position: absolute;
+  font-size: 8px;
+  bottom: 4px;
+  right: 4px;
+  text-decoration: none;
+  color: black;
+  background: yellow;
+  border-radius: 10px;
+  padding: 2px;
+}
+
+h1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+</style>
+</body>
+</html>
